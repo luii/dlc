@@ -1,0 +1,37 @@
+{
+  "name": "dlc",
+  "version": "0.1.0",
+  "description": "Decrypter for the Download Link Container (DLC)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/luii/dlc.git"
+  },
+  "keywords": [
+    "dlc",
+    "decrypt",
+    "download",
+    "link",
+    "container"
+  ],
+  "author": "luii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luii/dlc/issues"
+  },
+  "homepage": "https://github.com/luii/dlc#readme"
+}
