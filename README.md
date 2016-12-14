@@ -10,6 +10,8 @@ $ npm i -S dlc
 
 ## Usage
 
+**NOTE: You need to use the `--harmony` flag for async/await support**
+
 ```js
 const fs = require('fs')
 const decrypt = require('dlc')
