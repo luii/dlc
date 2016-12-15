@@ -39,13 +39,17 @@ async function decrypt(file) {
   let dlcKey = file.slice(-88) // get the last 88 chars (this is our key)
   let dlcData = Buffer.from(file.slice(0, -88).toString(), 'base64') // the rest is the content
 
-  let rc = await request(`${URL}${dlcKey}`)
-  let strippedRc = Buffer.from(rc.match(RC_EXPRESSION)[1], 'base64')
+  try {
+    let rc = await request(`${URL}${dlcKey}`)
+    let strippedRc = Buffer.from(rc.match(RC_EXPRESSION)[1], 'base64')
 
-  let decryptedKey  = await aes_decrypt(strippedRc, KEY, IV, 0).catch((err) => console.log)
-  let decryptedData = await aes_decrypt(dlcData, decryptedKey, decryptedKey, 0).catch((err) => console.log)
+    let decryptedKey  = await aes_decrypt(strippedRc, KEY, IV, 0).catch((err) => console.log)
+    let decryptedData = await aes_decrypt(dlcData, decryptedKey, decryptedKey, 0).catch((err) => console.log)
 
-  return await parseXML(Buffer.from(decryptedData, 'base64'))
+    return await parseXML(Buffer.from(decryptedData, 'base64'))
+  } catch (e) {
+    return Promise.reject(e)
+  }
 }
 
 /**
