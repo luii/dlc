@@ -43,8 +43,8 @@ async function decrypt(file) {
     let rc = await request(`${URL}${dlcKey}`)
     let strippedRc = Buffer.from(rc.match(RC_EXPRESSION)[1], 'base64')
 
-    let decryptedKey  = await aes_decrypt(strippedRc, KEY, IV, 0).catch((err) => console.log)
-    let decryptedData = await aes_decrypt(dlcData, decryptedKey, decryptedKey, 0).catch((err) => console.log)
+    let decryptedKey  = await aes_decrypt(strippedRc, KEY, IV, 0)
+    let decryptedData = await aes_decrypt(dlcData, decryptedKey, decryptedKey, 0)
 
     return await parseXML(Buffer.from(decryptedData, 'base64'))
   } catch (e) {
