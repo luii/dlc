@@ -31,9 +31,10 @@ const URL = 'http://service.jdownloader.org/dlcrypt/service.php?srcType=dlc&dest
 const RC_EXPRESSION = /<rc>([\s\S]+)<\/rc>/i
 
 /**
- * Decrypt dlc container
- * @todo   use maybe async/await or promises and clean up
- * @return {[type]} [description]
+ * Decryptes a dlc file containing links
+ * @access  public
+ * @param   {Buffer} file The whole content (as Buffer) of the dlc file
+ * @returns {Promise}     Returns a promise to match ES6 standarts
  */
 async function decrypt(file) {
   let dlcKey = file.slice(-88) // get the last 88 chars (this is our key)
@@ -54,6 +55,7 @@ async function decrypt(file) {
 
 /**
  * Decrypts the input data with the key and initializing vector
+ * @access private
  * @param  {String} data    The string to decrypt
  * @param  {string} key     The key for decrypting
  * @param  {string} iv      The init vector
@@ -67,9 +69,11 @@ function aes_decrypt(data, key, iv, padding) {
 }
 
 /**
- * [description]
- * @param  {[type]} buf [description]
- * @return {[type]}       [description]
+ * Parses the XML string of the dlc content and transfroms it into a
+ * human readable JSON object
+ * @access  private
+ * @param   {Buffer}  buf The Buffer containing the string
+ * @returns {Promise}     Returns a promise
  */
 function parseXML (buf) {
   return new Promise(function(resolve, reject) {
